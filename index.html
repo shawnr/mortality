@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <title>Mortality</title>
+    </head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <script src="js/snap.svg-min.js"></script>
+    <body>
+        <div id="SVGimage"></div>
+        <p id="debug-data"></p>
+    <script>
+        var debug = true;
+        var s = Snap("#SVGimage");
+        var living = [];
+        var dead = [];
+        var faces = 0;
+        Snap.load("truth-bg.svg", onSVGLoaded);
+
+        if (debug) {
+            let body = document.querySelector('body');
+            body.setAttribute('class', 'debug');
+
+            let debugData = document.querySelector('#debug-data');
+            debugData.innerHTML = `Faces detected: ${faces}`;
+
+            // Set up keyboard event to increase number of faces
+            document.addEventListener('keydown', function(event){
+                console.log('keypress detected');
+                if (event.keyCode === 38){
+                    console.log('Adding Face to counter');
+                    faces++;
+                    debugData.innerHTML = `Faces detected: ${faces}`;
+                }
+            });
+            // Set up keyboard event to decrease number of faces detected
+            document.addEventListener('keydown', function(event){
+                console.log('keypress detected');
+                if (event.keyCode === 40 && faces > 0){
+                    console.log('Removing Face from counter');
+                    faces--;
+                    debugData.innerHTML = `Faces detected: ${faces}`;
+                }
+            });
+        }
+
+        function onSVGLoaded(data) {
+            s.append( data );
+            living = s.selectAll('rect');
+            console.log(`Found ${living.length} rects.`);
+            setInterval(life, 1000);
+            console.log('loaded SVG');
+        }
+
+        function life() {
+            if (living.length > 0){
+                console.log('Expiring pixel...');
+                let randIndex = Math.floor(Math.random()*living.length);
+                let dyingPixel = living[randIndex];
+                dyingPixel.originalColor = dyingPixel.attr('fill');
+                dyingPixel.attr('fill', '#000');
+                dead.push(dyingPixel);
+                living.splice(randIndex, 1);
+                console.log('Expiring rect #'+randIndex);
+            } else {
+                console.log('All pixels dead.');
+            }
+
+            if (dead.length > 0) {
+                console.log(`${faces} faces detected.`);
+                if (faces > 0) {
+                    for (let i=0; i<faces; i++){
+                        if (dead.length > 0) {
+                            let randIndex = Math.floor(Math.random()*dead.length);
+                            let revivingPixel = dead[randIndex];
+                            revivingPixel.attr('fill', revivingPixel.originalColor);
+                            living.push(revivingPixel);
+                            dead.splice(randIndex, 1);
+                            console.log('Reviving rect #'+randIndex);
+                        } else {
+                            console.log('No more pixels to revive.');
+                        }
+                    }
+                }
+            } else {
+                console.log('No dead pixels.');
+            }
+        }
+    </script>
+    </body>
+</html>

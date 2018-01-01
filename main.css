@@ -1,0 +1,17 @@
+html, body {
+    color: #fff;
+    width: 100vw;
+    height: 100vh;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+#debug-data {
+    display: none;
+}
+.debug #debug-data {
+    display: block;
+    color: #fff;
+}
