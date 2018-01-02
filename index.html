@@ -68,7 +68,7 @@
       let styles = `
         width: ${pixel.attr('width')}px;
         height: ${pixel.attr('height')}px;
-        background-color: #000;
+        background-color: transparent;
         top: ${location.top};
         left: ${location.left};
       `
@@ -103,6 +103,7 @@
               let randIndex = Math.floor(Math.random()*dead.length);
               let revivingPixel = dead[randIndex];
               revivingPixel.attr('fill', revivingPixel.originalColor);
+              flareOut(revivingPixel);
               living.push(revivingPixel);
               dead.splice(randIndex, 1);
               console.log('Reviving rect #'+randIndex);
