@@ -18,6 +18,19 @@ html, body {
     color: #fff;
 }
 
+@keyframes shimmerBackground {
+    0% {opacity: 0}
+    50% {opacity: 1}
+    100% {opacity: 0}
+}
+
+.shimmer
+{
+background: #fff;
+opacity: 0;
+animation: shimmerBackground 100ms 1 ease-in-out;
+}
+
 .flareOut {
   position: absolute;
   z-index: 1000;
