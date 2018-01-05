@@ -1,4 +1,5 @@
 # Load script for Mortality viewer
+source /home/pi/.profile
 
 workon cv
 

@@ -1,3 +1,4 @@
+source /home/pi/.profile
 workon cv
 
 sleep 2
