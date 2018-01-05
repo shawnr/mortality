@@ -29,5 +29,5 @@ for (x,y,w,h) in faces:
 cv2.imwrite('result.jpg', image)
 
 file = open('faces.json')
-face_data = { num: len(faces) }
+face_data = { 'num': len(faces) }
 json.dump(face_data, file)
