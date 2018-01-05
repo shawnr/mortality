@@ -1,6 +1,7 @@
 source /home/pi/.profile
-workon cv
 
-sleep 2
+if hash workon 2>/dev/null; then
+  workon cv
+  sleep 2
 
 python detect_faces.py

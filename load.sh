@@ -1,9 +1,12 @@
 # Load script for Mortality viewer
 source /home/pi/.profile
 
-workon cv
+if hash workon 2>/dev/null; then
+  workon cv
+  sleep 2
 
-sleep 2
+
+
 
 cd /home/pi/mortality
 python -m http.server &
