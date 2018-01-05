@@ -61,14 +61,15 @@
       axios.get('./faces.json')
         .then(function (response) {
           console.log('loaded face data');
-          faces = response.data.num;
-          debug = response.data.debug;
+          let faceReport = JSON.parse(response.data);
+          faces = faceReport.num;
+          debug = faceReport.debug;
           if (debug)  {
             faces = Math.floor(Math.random() * (2 - 0 +1)) + 0;
             debugData.innerHTML = `Faces detected: ${faces}`;
           } else {
             if (debugData) {
-              document.removeElement(debugData);
+              body.removeChild(debugData);
               delete debugData;
             }
           }
