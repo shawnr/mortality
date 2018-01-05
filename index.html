@@ -21,7 +21,7 @@
     if (debug) {
       body.setAttribute('class', 'debug');
 
-      let debugData = document.querySelector('#debug-data');
+      var debugData = document.querySelector('#debug-data');
       debugData.innerHTML = `Faces detected: ${faces}`;
 
       // Set up keyboard event to increase number of faces
@@ -58,14 +58,21 @@
     }
 
     function checkFaces(){
-      axios.get('./faces.json')
-        .then(function (response) {
-          console.log('loaded face data');
-          faces = response.data.num;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      if (!debug) {
+        axios.get('./faces.json')
+          .then(function (response) {
+            console.log('loaded face data');
+            faces = response.data.num;
+            detectFaces();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        faces = Math.floor(Math.random() * (2 - 0 +1)) + 0;
+        debugData.innerHTML = `Faces detected: ${faces}`;
+        detectFaces();
+      }
     }
 
     let faceCheck = setInterval(checkFaces, 2000);
@@ -90,22 +97,24 @@
     function flareOut(pixel){
       let selector = `rect[x="${pixel.attr('x')}"][y="${pixel.attr('y')}"]`;
       let rectEl = document.querySelector(selector);
-      let location = rectEl.getBoundingClientRect()
+      if (rectEl) {
+        let location = rectEl.getBoundingClientRect()
 
-      let newFlare = document.createElement('span');
-      let styles = `
-        width: ${pixel.attr('width')}px;
-        height: ${pixel.attr('height')}px;
-        background-color: transparent;
-        top: ${location.top};
-        left: ${location.left};
-      `
-      newFlare.style.cssText = styles;
-      newFlare.setAttribute('class', 'flareOut');
-      body.appendChild(newFlare);
+        let newFlare = document.createElement('span');
+        let styles = `
+          width: ${pixel.attr('width')}px;
+          height: ${pixel.attr('height')}px;
+          background-color: transparent;
+          top: ${location.top};
+          left: ${location.left};
+        `
+        newFlare.style.cssText = styles;
+        newFlare.setAttribute('class', 'flareOut');
+        body.appendChild(newFlare);
 
-      let expireFlareOut = defer(removeElement, 2000);
-      expireFlareOut(newFlare);
+        let expireFlareOut = defer(removeElement, 2000);
+        expireFlareOut(newFlare);
+      }
     }
 
     function life() {
