@@ -58,21 +58,21 @@
     }
 
     function checkFaces(){
-      if (!debug) {
-        axios.get('./faces.json')
-          .then(function (response) {
-            console.log('loaded face data');
-            faces = response.data.num;
-            detectFaces();
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      } else {
-        faces = Math.floor(Math.random() * (2 - 0 +1)) + 0;
-        debugData.innerHTML = `Faces detected: ${faces}`;
-        detectFaces();
-      }
+      axios.get('./faces.json')
+        .then(function (response) {
+          console.log('loaded face data');
+          faces = response.data.num;
+          debug = response.data.debug;
+          if (debug)  {
+            faces = Math.floor(Math.random() * (2 - 0 +1)) + 0;
+            debugData.innerHTML = `Faces detected: ${faces}`;
+          }
+          detectFaces();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
     }
 
     let faceCheck = setInterval(checkFaces, 2000);
