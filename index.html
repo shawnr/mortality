@@ -66,6 +66,11 @@
           if (debug)  {
             faces = Math.floor(Math.random() * (2 - 0 +1)) + 0;
             debugData.innerHTML = `Faces detected: ${faces}`;
+          } else {
+            if (debugData) {
+              document.removeElement(debugData);
+              delete debugData;
+            }
           }
           detectFaces();
         })
