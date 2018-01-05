@@ -61,7 +61,7 @@
       axios.get('./faces.json')
         .then(function (response) {
           console.log('loaded face data');
-          let faceReport = JSON.parse(response.data);
+          let faceReport = response.data;
           faces = faceReport.num;
           debug = faceReport.debug;
           if (debug)  {
