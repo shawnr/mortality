@@ -1,19 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 # Load script for Mortality viewer
+
+sleep 20
 date
 
 echo "loading mortality viewer"
 
-source /home/pi/.profile
-
-if hash workon 2>/dev/null; then
-  workon cv
-  sleep 2
+cd /home/pi/.virtualenvs/cv
+source bin/activate
 
 cd /home/pi/mortality
 python -m http.server &
 
-sleep 2
+sleep 5
 
 chromium-browser --kiosk http://localhost:8000
