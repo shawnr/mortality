@@ -1,4 +1,8 @@
 # Load script for Mortality viewer
+date
+
+echo "loading mortality viewer"
+
 source /home/pi/.profile
 
 if hash workon 2>/dev/null; then
