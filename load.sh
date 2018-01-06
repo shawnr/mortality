@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Load script for Mortality viewer
 date
 

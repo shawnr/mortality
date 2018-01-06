@@ -1,3 +1,5 @@
+#!/bin/sh
+
 date
 echo "detecting faces"
 
