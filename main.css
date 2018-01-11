@@ -24,11 +24,25 @@ html, body {
     100% {opacity: 0}
 }
 
-.shimmer
-{
-background: #fff;
-opacity: 0;
-animation: shimmerBackground 100ms 1 ease-in-out;
+.shim {
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  transition: 100ms all ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+.shim.show {
+  opacity: 0.5;
+}
+
+.flash.shim {
+  background: #fff;
+}
+.dim.shim {
+  background: #000;
 }
 
 .flareOut {

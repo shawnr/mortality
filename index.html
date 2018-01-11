@@ -8,6 +8,8 @@
   <body>
     <div id="SVGimage"></div>
     <p id="debug-data"></p>
+    <div id="flash-shim" class="flash shim"></div>
+    <div id="dim-shim" class="dim shim"></div>
   <script>
     var debug = true;
     var s = Snap("#SVGimage");
@@ -16,6 +18,8 @@
     var faces = 0;
     var prevFaces = 0;
     let body = document.querySelector('body');
+    let flashShim = document.querySelector('#flash-shim');
+    let dimShim = document.querySelector('#dim-shim');
     Snap.load("truth-bg.svg", onSVGLoaded);
 
     if (debug) {
@@ -49,10 +53,18 @@
         // Flash to indicate addition of new faces
         let newFaces = faces - prevFaces;
         console.log('Detected new faces: '+newFaces);
+        if (newFaces > 0) {
+          flashShim.setAttribute('class', 'flash shim show');
+          setTimeout(function(){ flashShim.setAttribute('class', 'flash shim')}, 110);
+        }
       } else if (faces < prevFaces) {
         // Flash to indicate removal of faces
         let lostFaces = prevFaces - faces;
         console.log('Detected lost faces: '+lostFaces);
+        if (lostFaces > 0) {
+          dimShim.setAttribute('class', 'dim shim show');
+          setTimeout(function(){ dimShim.setAttribute('class', 'dim shim')}, 110);
+        }
       }
       prevFaces = faces;
     }
@@ -81,7 +93,7 @@
 
     }
 
-    let faceCheck = setInterval(checkFaces, 2000);
+    let faceCheck = setInterval(checkFaces, 5000);
 
     function onSVGLoaded(data) {
       s.append( data );
