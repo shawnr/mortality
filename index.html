@@ -20,7 +20,7 @@
     let body = document.querySelector('body');
     let flashShim = document.querySelector('#flash-shim');
     let dimShim = document.querySelector('#dim-shim');
-    Snap.load("truth-bg.svg", onSVGLoaded);
+    Snap.load("liberty-fullcolor.svg", onSVGLoaded);
 
     if (debug) {
       body.setAttribute('class', 'debug');
@@ -77,7 +77,8 @@
           faces = faceReport.num;
           debug = faceReport.debug;
           if (debug)  {
-            faces = Math.floor(Math.random() * (2 - 0 +1)) + 0;
+            let visitorGroups = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 3, 3]
+            faces = visitorGroups[Math.floor(Math.random() * visitorGroups.length)];
             debugData.innerHTML = `Faces detected: ${faces}`;
           } else {
             if (debugData != null) {
@@ -99,7 +100,7 @@
       s.append( data );
       living = s.selectAll('rect');
       console.log(`Found ${living.length} rects.`);
-      setInterval(life, 1000);
+      setInterval(life, 500);
       console.log('loaded SVG');
     }
     function defer(f, ms) {
