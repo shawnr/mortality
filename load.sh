@@ -12,6 +12,9 @@ source bin/activate
 
 echo "cv environment activated"
 
+echo "starting face detection script"
+watch -n1 /home/pi/mortality/detect_faces.sh >> /home/pi/detect_faces.log &
+
 cd /home/pi/mortality
 python -m http.server &
 
