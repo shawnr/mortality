@@ -26,7 +26,7 @@ def detect_faces():
   print(result_text)
 
   for (x,y,w,h) in faces:
-      cv2.rectangle(image, (x,y), (x+w, y+h), (255, 255, 0), 2)
+      cv2.rectangle(image, (x,y), (x+w, y+h), (255, 0, 0), 2)
 
   cv2.imwrite('result.jpg', image)
 
