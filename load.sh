@@ -16,7 +16,7 @@ echo "starting face detection script"
 # watch -n1 /home/pi/mortality/detect_faces.sh >> /home/pi/detect_faces.log &
 
 cd /home/pi/mortality
-python detect_faces.py &
+python detect_faces.py >> /home/pi/detect_faces.log &
 
 python -m http.server &
 
