@@ -2,7 +2,7 @@
 
 # Load script for Mortality viewer
 
-sleep 20
+echo "|------- Boot Initiated ----------|"
 date
 
 echo "loading mortality viewer"
@@ -20,10 +20,10 @@ python -m http.server &
 
 echo "web server starting"
 
-sleep 5
+sleep 2
 
-echo "chromium kiosk starting"
+echo "boot completed"
 date
 echo "|---------------------------------|"
 
-chromium-browser --kiosk http://localhost:8000
+# chromium-browser --kiosk http://localhost:8000
